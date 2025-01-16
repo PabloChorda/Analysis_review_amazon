@@ -1,5 +1,7 @@
 # Importar bibliotecas
 import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
 
 # Ruta del dataset (ajusta si es necesario)
 dataset_path = '/Users/bigsur/Desktop/SentimentAnalysisAmazon/data/amazon_reviews.csv'
@@ -56,7 +58,49 @@ df['sentiment'] = df['reviews.rating'].apply(map_sentiment)
 print("\nEjemplo de etiquetas asignadas:")
 print(df[['reviews.rating', 'sentiment']].head())
 
+# --- Preprocesamiento de texto ---
+import re
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+
+# Descargar stopwords si es necesario
+import nltk
+nltk.download('stopwords')
+
+stop_words = set(stopwords.words('english'))
+stemmer = PorterStemmer()
+
+def clean_text(text):
+    # Eliminar caracteres especiales, números y convertir a minúsculas
+    text = re.sub(r'[^a-zA-Z]', ' ', text).lower()
+    # Tokenización y eliminación de stopwords
+    tokens = text.split()
+    tokens = [stemmer.stem(word) for word in tokens if word not in stop_words]
+    return ' '.join(tokens)
+
+df['cleaned_text'] = df['reviews.text'].apply(clean_text)
+print("\nTexto limpio (ejemplo):")
+print(df[['reviews.text', 'cleaned_text']].head())
+
 # Guardar dataset limpio
 output_path = '/Users/bigsur/Desktop/SentimentAnalysisAmazon/data/cleaned_sentiment_reviews.csv'
 df.to_csv(output_path, index=False)
 print(f"\nDataset limpio guardado en: {output_path}")
+
+# --- Vectorización y división de datos ---
+# Configurar el vectorizador TF-IDF
+vectorizer = TfidfVectorizer(max_features=5000)  # Limitamos a 5000 palabras más frecuentes
+
+# Convertir el texto limpio a una representación numérica
+X = vectorizer.fit_transform(df['cleaned_text']).toarray()
+y = df['sentiment']
+
+# Verificar la dimensión de los datos vectorizados
+print("\nDimensiones de X (datos vectorizados):", X.shape)
+
+# Dividir los datos en entrenamiento y prueba (80% entrenamiento, 20% prueba)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Mostrar el tamaño de los conjuntos de datos
+print(f"\nTamaño del conjunto de entrenamiento: {X_train.shape}")
+print(f"Tamaño del conjunto de prueba: {X_test.shape}")
