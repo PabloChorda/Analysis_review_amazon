@@ -2,6 +2,13 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+import re
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+import nltk
+
+# Descargar stopwords si es necesario
+nltk.download('stopwords')
 
 # Ruta del dataset (ajusta si es necesario)
 dataset_path = '/Users/bigsur/Desktop/SentimentAnalysisAmazon/data/amazon_reviews.csv'
@@ -59,14 +66,6 @@ print("\nEjemplo de etiquetas asignadas:")
 print(df[['reviews.rating', 'sentiment']].head())
 
 # --- Preprocesamiento de texto ---
-import re
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-
-# Descargar stopwords si es necesario
-import nltk
-nltk.download('stopwords')
-
 stop_words = set(stopwords.words('english'))
 stemmer = PorterStemmer()
 
