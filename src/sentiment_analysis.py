@@ -11,7 +11,7 @@ import nltk
 nltk.download('stopwords')
 
 # Ruta del dataset (ajusta según tu sistema)
-dataset_path = '/Usuarios/bigsur/Escritorio/SentimentAnalysisAmazon/data/amazon_reviews.csv'
+dataset_path = '/Users/bigsur/Desktop/SentimentAnalysisAmazon/data/amazon_reviews.csv'
 
 # Cargar el archivo CSV
 try:
@@ -82,7 +82,7 @@ print("\nTexto limpio (ejemplo):")
 print(df[['reviews.text', 'cleaned_text']].head())
 
 # Guardar dataset limpio
-output_path = '/Usuarios/bigsur/Escritorio/SentimentAnalysisAmazon/data/cleaned_sentiment_reviews.csv'
+output_path = '/Users/bigsur/Desktop/SentimentAnalysisAmazon/data/cleaned_sentiment_reviews.csv'
 df.to_csv(output_path, index=False)
 print(f"\nDataset limpio guardado en: {output_path}")
 
