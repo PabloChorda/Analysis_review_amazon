@@ -10,7 +10,7 @@ import nltk
 # Descargar las stopwords de NLTK si es necesario
 nltk.download('stopwords')
 
-# Ruta del dataset (ajusta según tu sistema)
+# Ruta del dataset (ajusta según tu ruta)
 dataset_path = '/Users/bigsur/Desktop/SentimentAnalysisAmazon/data/amazon_reviews.csv'
 
 # Cargar el archivo CSV
