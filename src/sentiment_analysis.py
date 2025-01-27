@@ -7,7 +7,7 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
 
-# Descargar las stopwords de NLTK si es necesario
+# Descargar las stopwords de (NLTK si es necesario)
 nltk.download('stopwords')
 
 # Ruta del dataset (ajusta según tu ruta)
