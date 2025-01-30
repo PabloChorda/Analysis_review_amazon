@@ -82,3 +82,5 @@ Permite descargar gráficos o datos procesados como PDF o Excel.
 Deploy de la plataforma:
 
 Despliega la aplicación con Heroku, AWS o Railway.
+
+Nuevos cambios:
