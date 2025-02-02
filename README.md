@@ -84,3 +84,5 @@ Deploy de la plataforma:
 Despliega la aplicación con Heroku, AWS o Railway.
 
 Nuevos cambios:
+1.
+2.
